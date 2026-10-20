@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Generated data
+data/raw/
+data/processed/
+
+# Airflow
+logs/*
+!logs/.gitkeep
+airflow.db
+airflow.cfg
+webserver_config.py
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+dbt_project/profiles.yml
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
