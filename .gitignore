@@ -10,7 +10,13 @@ venv/
 .env
 .env.*
 !.env.example
-*.json
+
+# Google Cloud credentials
+application_default_credentials.json
+
+# Generated data
+data/raw/*
+!data/raw/.gitkeep
 
 # Airflow
 logs/*
