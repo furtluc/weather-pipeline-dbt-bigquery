@@ -1,2 +1,4 @@
 requests==2.34.2
 pytest==9.1.1
+dbt-core==1.12.6
+dbt-bigquery==1.12.1

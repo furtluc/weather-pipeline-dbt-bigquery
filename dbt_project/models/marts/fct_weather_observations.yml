@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_weather_observations
+    description: "Analytical model for weather observations"
+    columns:
+      - name: temperature_c
+        data_tests:
+          - not_null
+
+      - name: relative_humidity_pct
+        data_tests:
+          - not_null

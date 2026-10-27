@@ -1,4 +1,5 @@
 from datetime import datetime
+import subprocess
 
 from airflow.sdk import dag, task
 
@@ -7,15 +8,16 @@ from src.extract_weather import (
     save_weather,
     validate_weather,
 )
+from src.load_weather import load_weather
 
 
 @dag(
     dag_id="weather_pipeline",
-    description="Extract current weather data from Open-Meteo",
+    description="Extract, load and transform weather data",
     schedule=None,
     start_date=datetime(2026, 1, 1),
     catchup=False,
-    tags=["weather", "etl"],
+    tags=["weather", "etl", "bigquery", "dbt"],
 )
 def weather_pipeline():
 
@@ -34,8 +36,31 @@ def weather_pipeline():
         )
 
         print(f"Weather data saved to {output_path}")
+        return output_path
 
-    extract()
+    @task
+    def load(json_path: str):
+        load_weather(json_path)
+
+    @task
+    def transform():
+        subprocess.run(
+            [
+                "dbt",
+                "build",
+                "--project-dir",
+                "/opt/airflow/dbt_project",
+                "--profiles-dir",
+                "/home/airflow/.dbt",
+            ],
+            check=True,
+        )
+
+    json_path = extract()
+    load_task = load(json_path)
+    transform_task = transform()
+
+    load_task >> transform_task
 
 
 weather_pipeline()

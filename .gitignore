@@ -1,18 +1,16 @@
 # Python
 __pycache__/
 *.py[cod]
+.pytest_cache/
 .venv/
 venv/
-.pytest_cache/
+.venv-*/
 
 # Environment variables and secrets
 .env
 .env.*
 !.env.example
-
-# Generated data
-data/raw/
-data/processed/
+*.json
 
 # Airflow
 logs/*
