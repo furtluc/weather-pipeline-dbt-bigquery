@@ -40,6 +40,22 @@ The project was designed to practice core data engineering concepts, including A
 
 Apache Airflow orchestrates the workflow, coordinating the extraction, loading, and transformation tasks.
 
+## Pipeline Execution 📸
+
+### Apache Airflow
+
+The pipeline is orchestrated by Apache Airflow. The DAG
+coordinates data extraction, loading, and dbt transformations.
+
+![Successful Airflow DAG run](docs/images/airflow-dag-success.png)
+
+### BigQuery
+
+The transformed weather observations are available in BigQuery
+for analytical queries.
+
+![Weather data in BigQuery](docs/images/bigquery-results.png)
+
 ## Data Modeling 🛠️
 
 The project follows a layered approach to data modeling.
